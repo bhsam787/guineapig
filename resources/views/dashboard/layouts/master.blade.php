@@ -30,30 +30,30 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
     <style media="screen">
-        .notifyjs-corner {
-            z-index: 10000 !important;
+        .alert-pos{
+          position: absolute;
+          width: 30%;
+           right: 0;
+           z-index: 999999;
         }
     </style>
 </head>
 
 <body class="">
 
+  @if (session()->has('msg'))
+    <div class="container alert-pos">
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <p class="text-white">{{ session()->get('msg') }}</p>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+    </div>
+  @endif
     @yield('content')
-    @if (session()->has('success'))
-    <script type="text/javascript">
-        $(function() {
-            $.notify({
-                {
-                    session() - > get('success')
-                }
-            }, {
-                globalPosition: 'top right',
-                className: 'success'
-            });
-        });
-    </script>
 
-    @endif
+
     <!-- jQuery -->
     <script src="{{ asset('assets/plugins/jquery/jquery.min.js')}}"></script>
     <!-- jQuery UI 1.11.4 -->
@@ -112,6 +112,7 @@
                 "responsive": true,
             });
         });
+        $('.alert').alert()
     </script>
     <script type="text/javascript">
         $(function() {
@@ -128,7 +129,7 @@
                     confirmButtonText: 'Yes, delete it!'
                 }).then((result) => {
                     if (result.value) {
-                      window.location.href=link;
+                        window.location.href = link;
                         Swal.fire(
                             'Deleted!',
                             'Your file has been deleted.',

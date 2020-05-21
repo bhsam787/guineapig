@@ -21,6 +21,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/user', 'UserController');
-Route::get('/about',function(){
-  return "hellow world";
-})->middleware('test');
+Route::resource('/category','CategoryController');
+Route::resource('/unit','UnitController');
